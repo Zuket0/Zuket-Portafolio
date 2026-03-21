@@ -15,24 +15,24 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
             charIndex++;
         }
 
-        let typeSpeed = 100; // Velocidad de escritura
+        let typeSpeed = 100;
         if (isDeleting) {
-            typeSpeed /= 2; // Velocidad de borrado más rápida
+            typeSpeed /= 2;
         }
 
         if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2000; // Pausa al terminar de escribir la palabra
+            typeSpeed = 2000; // Pausa al terminar
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             textIndex = (textIndex + 1) % textArray.length;
-            typeSpeed = 500; // Pausa antes de escribir la siguiente palabra
+            typeSpeed = 500; // Pausa antes
         }
 
         setTimeout(type, typeSpeed);
     }
 
-    // Iniciar el efecto cuando el documento cargue
+    // Iniciar efecto
     document.addEventListener("DOMContentLoaded", type);
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -42,20 +42,18 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Dejamos de observar para que la animación no se repita al subir
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            rootMargin: '0px 0px -50px 0px', // Activa la animación un poco antes de llegar al fondo
-            threshold: 0.15 // El 15% del elemento debe ser visible para activarse
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.15 // 15%
         });
 
         reveals.forEach(reveal => {
             revealObserver.observe(reveal);
         });
             
-        // Forzar la animación inicial para los elementos que ya están visibles al cargar la página
         setTimeout(() => {
             reveals.forEach(reveal => {
                 const rect = reveal.getBoundingClientRect();
@@ -73,13 +71,11 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 1. Quitar la clase 'active' de todos los botones y ponérsela al que se hizo clic
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
                 const filterValue = btn.getAttribute('data-filter');
 
-                // 2. FASE DE SALIDA: Aplicar fade-out a los elementos que no coinciden
                 projectItems.forEach(item => {
                     const itemCategory = item.getAttribute('data-category');
                     if (filterValue !== 'todos' && filterValue !== itemCategory) {
@@ -87,21 +83,17 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
                     }
                 });
 
-                // 3. Esperar a que termine la animación de opacidad (400ms) antes de reordenar el layout
                 setTimeout(() => {
                     projectItems.forEach(item => {
                         const itemCategory = item.getAttribute('data-category');
                         
                         if (filterValue === 'todos' || filterValue === itemCategory) {
-                            // FASE DE ENTRADA: Mostrar el proyecto en el DOM
                             item.classList.remove('hide');
                             
-                            // Pequeño retraso para que el navegador procese el cambio de 'hide' antes de animar
                             setTimeout(() => {
                                 item.classList.remove('fade-out');
                             }, 50);
                         } else {
-                            // Ahora sí, ocultar completamente el elemento del flujo de la página
                             item.classList.add('hide');
                         }
                     });
@@ -121,7 +113,6 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
         
         let autoScrollSpeed = 0.30; 
         
-        // Acumulador exacto para evitar tirones a velocidades súper lentas
         let exactScroll = 0; 
 
         function autoScroll() {
@@ -129,7 +120,6 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
                 exactScroll += autoScrollSpeed;
                 slider.scrollLeft = exactScroll;
                 
-                // Reinicio infinito conservando decimales perfectos
                 if (slider.scrollLeft >= slider.scrollWidth / 2) {
                     exactScroll -= slider.scrollWidth / 2;
                     slider.scrollLeft = exactScroll;
@@ -158,7 +148,7 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
 
         slider.addEventListener('mouseleave', () => {
             if (!isDown) {
-                exactScroll = slider.scrollLeft; // Sincronizar tras arrastrar
+                exactScroll = slider.scrollLeft;
                 autoScroll();
             } else {
                 isDown = false;
@@ -223,21 +213,50 @@ const textArray = ["Juan Chavez E.", "Full Stack Developer"];
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('contact-form');
+    const contactForm = document.querySelector('.contact-form form');
     const submitBtn = document.getElementById('submit-btn');
     const btnText = submitBtn.querySelector('span');
     const btnIcon = submitBtn.querySelector('i');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', () => {
-            // Deshabilitar el botón para evitar spam
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.7';
             submitBtn.style.cursor = 'not-allowed';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
 
-            // Cambiar el icono a un spinner de carga y el texto
-            btnIcon.className = 'fa-solid fa-spinner fa-spin'; 
-            btnText.innerText = ' Enviando...';
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    window.location.href = '/gracias.html';
+                } else {
+                    alert("Hubo un problema al procesar tu solicitud. Por favor, intenta de nuevo.");
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                    submitBtn.innerHTML = originalText;
+                }
+            } catch (error) {
+                alert("Error de conexión. Verifica tu red y vuelve a intentarlo.");
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                submitBtn.innerHTML = originalText;
+            }
         });
     }
 });
