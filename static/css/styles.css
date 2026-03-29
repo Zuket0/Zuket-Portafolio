@@ -7,7 +7,7 @@
             --accent-purple-hover: #6d28d9;
             --highlight-yellow: #fbbf24;
             --border-color: #334155;
-            --placeholder-color: #cbd5e1; /* Gris más brillante para placeholders */
+            --placeholder-color: #cbd5e1;
         }
 
         body {
@@ -42,7 +42,7 @@
         }
         .section-title span { color: var(--accent-purple); }
 
-        /* --- Hero Section (Alineado a la izquierda) --- */
+        /* --- Hero Section --- */
         .hero-section {
             padding: 120px 0 80px 0;
             text-align: left;
@@ -59,7 +59,7 @@
             font-weight: 800;
             margin-bottom: 20px;
             color: var(--text-main);
-            min-height: 80px; /* Evita que el texto salte al borrar */
+            min-height: 80px;
         }
         .cursor {
             color: var(--accent-purple);
@@ -81,7 +81,7 @@
             max-width: 650px;
             margin-bottom: 40px;
             line-height: 1.7;
-            text-align: justify; /* Texto ordenado */
+            text-align: justify;
         }
 
         /* --- Botones --- */
@@ -121,19 +121,19 @@
             color: var(--accent-purple);
         }
 
-        /* --- Sobre Mí --- */
+        /* --- Sobre Mi --- */
         .about-box {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 40px;
-            max-width: 800px; /* Evita que se estire demasiado */
+            max-width: 800px;
             margin: 0 auto;
-            text-align: justify; /* Mantiene todo ordenado */
+            text-align: justify;
         }
         .about-box p { color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; }
 
-        /* --- Carrusel de Tecnologías --- */
+        /* --- Carrusel de Tecnologias --- */
         .skills-slider {
             overflow: hidden;
             padding: 20px 0;
@@ -174,7 +174,7 @@
         }
         .skill-card span { display: block; font-weight: 600; font-size: 0.9rem; }
 
-        /* Clases para los colores de cada tecnología al pasar el mouse */
+        /* Clases para los colores de cada tecnologia */
         .skill-card.hover-html:hover i { color: #e34f26; }
         .skill-card.hover-css:hover i { color: #1572b6; }
         .skill-card.hover-js:hover i { color: #f7df1e; }
@@ -187,7 +187,7 @@
         .skill-card.hover-fire:hover i { color: #ffca28; }
         .skill-card.hover-php:hover i { color: #777bb4; }
 
-        /* Máscara de degradado para los bordes del carrusel */
+        /* Mascara de degradado para los bordes */
         .skills-slider::before,
         .skills-slider::after {
             content: "";
@@ -209,11 +209,10 @@
         .skills-track {
             display: inline-flex;
             gap: 30px;
-            /* La animación dura 20s, ajusta para más lento o rápido */
             animation: slide 20s linear infinite;
         }
         .skills-track:hover {
-            animation-play-state: paused; /* Se pausa al pasar el ratón */
+            animation-play-state: paused;
         }
 
         @keyframes slide {
@@ -283,7 +282,7 @@
         .project-content h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
         .project-content p { color: var(--text-muted); font-size: 0.95rem; text-align: justify; }
 
-        /* --- Tecnologías en Tarjetas de Proyecto --- */
+        /* --- Tecnologias en Tarjetas de Proyecto --- */
         .project-tech {
             margin-top: 15px;
             padding-top: 15px;
@@ -337,14 +336,14 @@
             border-color: var(--accent-purple);
             box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.25);
         }
-        /* Ajuste de brillo para los placeholders */
+        /* Ajuste de brillo */
         .form-control::placeholder {
             color: var(--placeholder-color);
             opacity: 1;
         }
         .form-label { font-weight: 600; color: var(--text-muted); }
 
-        /* --- Animación de Filtrado para Proyectos --- */
+        /* --- Animacion de Filtrado para Proyectos --- */
         .project-item {
             transition: opacity 0.1s ease, transform 0.1s ease;
         }
@@ -364,7 +363,7 @@
             .bio-short { text-align: left; }
         }
 
-        /* --- Animaciones de Scroll Aparicióo --- */
+        /* --- Animaciones de Scroll --- */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -384,14 +383,12 @@
         /* Contenedor de la imagen */
         .project-img {
             width: 100%;
-            height: 220px; /* Puedes ajustar esta altura según veas conveniente para tus tarjetas */
-            overflow: hidden; /* Asegura que la imagen no se salga si la tarjeta tiene bordes redondeados */
+            height: 220px;
+            overflow: hidden;
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Si tu tarjeta (.project-card) tiene bordes redondeados, descomenta la siguiente línea y ajusta los pixeles */
-            /* border-radius: 12px 12px 0 0; */
         }
 
         /* La imagen de captura */
@@ -421,7 +418,7 @@
             text-transform: uppercase;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
-        /* Colores específicos para cada arquitectura */
+        /* Colores especificos para cada arquitectura */
         .badge-software {
             background: linear-gradient(90deg, #3b82f6, #1d4ed8);
         }
@@ -434,10 +431,10 @@
         
         /* --- Estilos para los Modales de Proyectos --- */
         .project-card {
-            cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+            cursor: pointer;
         }
         
-        /* Efecto de fondo difuminado (Blur) */
+        /* Efecto de fondo Blur */
         .modal-backdrop.show {
             opacity: 0.7 !important;
             backdrop-filter: blur(8px);
@@ -503,7 +500,7 @@
             color: var(--accent-purple);
             margin-top: 5px;
         }
-        /* --- Galería de Imágenes (Estilo Caso de Estudio) --- */
+        /* --- Galeria de Imagenes --- */
         .modal-gallery {
             margin-top: 30px;
             border-top: 1px dashed var(--border-color);
@@ -524,8 +521,8 @@
         }
         .modal-gallery img {
             width: 100%;
-            height: auto; /* Mantiene la proporción original */
-            max-height: 500px; /* Evita que una imagen vertical sea infinita */
+            height: auto;
+            max-height: 500px;
             object-fit: cover;
             object-position: top; 
             border-radius: 8px;
@@ -540,5 +537,5 @@
             flex-wrap: wrap;
         }
         .modal-actions .btn-outline-custom {
-            margin-left: 0; /* Resetea el margen para el modal */
+            margin-left: 0;
         }
