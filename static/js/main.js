@@ -1,5 +1,5 @@
 // EFECTO TYPEWRITER
-const textArray = ["Juan Chavez E.", "Full Stack Developer"];
+const textArray = ["Juan Chávez E.", "Full Stack Developer"];
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;

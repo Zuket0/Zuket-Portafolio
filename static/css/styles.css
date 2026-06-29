@@ -59,7 +59,7 @@ section {
 
 /* NAVBAR */
 .navbar {
-    padding: 1rem 0;
+    padding: 0.2rem 0;
     background-color: rgba(28, 28, 28, 0.95);
     border-bottom: 1px solid var(--border-color);
 }
@@ -70,8 +70,10 @@ section {
     letter-spacing: 1px;
 }
 
-.navbar-brand i { 
-    color: var(--accent-purple); 
+.navbar-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-link { 
